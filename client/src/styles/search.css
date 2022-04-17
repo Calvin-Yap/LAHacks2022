@@ -1,0 +1,13 @@
+.searchContainer input{
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    padding: 1%;
+    font-size: 1.5rem;
+}
+.searchContainer input:focus{
+    border: none;
+    outline: none;
+    border-radius: 7px;
+
+}

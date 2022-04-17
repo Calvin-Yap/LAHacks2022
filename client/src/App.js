@@ -1,22 +1,29 @@
-import logo from './logo.svg';
+import React from "react";
+
+import Map from "./components/Map";
+
+import{
+  BrowserRouter as Router,
+  Route,
+  Routes
+}from "react-router-dom"
+import SignInPage from './components/SignInPage';
+import { useAuth } from './Firebase';
+
 
 function App() {
+  const currentUser = useAuth();
+  const user = currentUser
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      
+    <Router>
+      <Routes>
+        {currentUser?<Route path="/" element={<Map user={user}/>}/>: <Route path="/" element={<SignInPage/>}/>}
+      </Routes>
+    </Router>
+
+      
     </div>
   );
 }
