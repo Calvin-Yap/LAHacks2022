@@ -28,14 +28,13 @@ export default function Search({panTo}) {
       };
     
       const handleSelect = async (address) => {
+          setValue(address, false)
+          clearSuggestions()
           try{
-              console.log(address)
             const results = await getGeocode({address})
             const {lat, lng} = await getLatLng(results[0])
-            console.log({lat,lng})
             panTo({lat,lng})
-            //handleSearchLocation({lat:lat, lng: lng})
-
+            setValue("")
           }catch(e){
 
           }
@@ -45,7 +44,9 @@ export default function Search({panTo}) {
 
   return (
     <div className='searchContainer'>
-    <Combobox onSelect={(address)=>handleSelect(address)}>
+    <Combobox onSelect={async (address)=>handleSelect(address) }
+    
+    >
       <ComboboxInput placeholder="Search for a Location ..." value={value} onChange={handleInput} disabled={!ready} />
       <ComboboxPopover>
         <ComboboxList>

@@ -1,7 +1,7 @@
 import React, {useState, useCallback, useRef, useEffect} from "react";
 import Modal from 'react-modal';
 import { database} from "../Firebase";
-import {set, ref, onValue} from "firebase/database"
+import {set, ref, onValue, update} from "firebase/database"
 import SingleEvent from "./SingleEvent";
 import "../styles/map.css"
 
@@ -18,13 +18,11 @@ import Event from "./Event";
 import NavBar from "./NavBar";
 
 const libraries = ['places']
-export default function Map({handleEventName, handleDateAndTime, handleActivityName, handleExperienceLevel, handleAgeRange, handleActivityDescription}) {
-    const [markers, setMarkers] = useState([])
+export default function Map({user}) {
     const [modalIsOpen, setIsOpen] = React.useState(false);
-    const [center, setCenter] = useState({ lat: 43.856098,lng:-79.337021})
+    const [center ] = useState({ lat: 43.856098,lng:-79.337021})
     const [holdDetails, setDetails] = useState({})
     const [selected, setSelected] = useState(null);
-
     const [databaseMarkers, setDatabaseMarkers] = useState([])
 
 
@@ -40,6 +38,7 @@ export default function Map({handleEventName, handleDateAndTime, handleActivityN
 
 
     useEffect(()=>{
+      
       onValue(ref(database, 'Markers'), snapshot =>{
         const data = snapshot.val()
         let result = [];
@@ -72,7 +71,7 @@ export default function Map({handleEventName, handleDateAndTime, handleActivityN
 
     const panTo = useCallback(({ lat, lng }) => {
       mapRef.current.panTo({ lat, lng });
-      mapRef.current.setZoom(20);
+      mapRef.current.setZoom(15);
     }, []);
     const{isLoaded, loadError} = useLoadScript({
       googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -106,21 +105,12 @@ export default function Map({handleEventName, handleDateAndTime, handleActivityN
           activityName:activityName,
           experienceLevel: experienceLevel,
           ageRange:ageRange,
-          activityDescription:activityDescription
+          activityDescription:activityDescription,
 
         });
-        setMarkers((prev)=>[...prev, {
-          id: uuidv4(),
-          lat:holdDetails.lat,
-          lng:holdDetails.lng,
-          eventName: eventName,
-          dateAndTime: dateAndTime,
-          activityName:activityName,
-          experienceLevel: experienceLevel,
-          ageRange:ageRange,
-          activityDescription:activityDescription
-        }
-        ])
+        set(ref(database, `Markers/${uuid}/attendees/${uuid}`), {
+          photo: user.photoURL
+        });
 
         setEventName("")
         setDateAndTime("")
@@ -133,11 +123,17 @@ export default function Map({handleEventName, handleDateAndTime, handleActivityN
     }
 
     const clickedMap =(e)=>{
+        console.log(databaseMarkers)
       setIsOpen(true);
       setDetails({lat:e.latLng.lat(),lng:e.latLng.lng()})
     }
     
-
+    const joinClick = (e)=>{
+      const uuid = uuidv4()
+      update(ref(database, `Markers/${uuid}/attendees/${uuid}`), {
+        photo: user.photoURL
+      });
+    }
     return (
       <div>
         <NavBar/>
@@ -148,12 +144,11 @@ export default function Map({handleEventName, handleDateAndTime, handleActivityN
          zoom={15}
          center={center}
           options={styles}
-          
           onClick={(e)=>clickedMap(e)}
           onLoad={onMapLoad}
          >
 
-           {markers&&databaseMarkers.map((marker) => (
+           {databaseMarkers.map((marker) => (
           <Marker
             key={marker.id}
             position={{ lat: marker.lat, lng: marker.lng }}
@@ -189,9 +184,14 @@ export default function Map({handleEventName, handleDateAndTime, handleActivityN
              </div>
            </InfoWindow>):null}
         </GoogleMap>
+        <div className="card-title">
+          <h1>All Events</h1>
+        </div>
         {
+          
           databaseMarkers.map((eachEvent)=>{
-            return <SingleEvent key={eachEvent.id} databaseMarkers={eachEvent}/>
+            console.log(eachEvent.attendees)
+            return <SingleEvent key={eachEvent.id} databaseMarkers={eachEvent} joinClick={joinClick} />
           })
         }
         

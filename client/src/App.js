@@ -1,7 +1,7 @@
-import React,{useState} from "react";
+import React from "react";
 
 import Map from "./components/Map";
-import {signInWithGoogle} from "./Firebase"
+
 import{
   BrowserRouter as Router,
   Route,
@@ -10,14 +10,16 @@ import{
 import SignInPage from './components/SignInPage';
 import { useAuth } from './Firebase';
 
+
 function App() {
   const currentUser = useAuth();
+  const user = currentUser
   return (
     <div>
       
     <Router>
       <Routes>
-        {currentUser?<Route path="/" element={<Map/>}/>: <Route path="/" element={<SignInPage/>}/>}
+        {currentUser?<Route path="/" element={<Map user={user}/>}/>: <Route path="/" element={<SignInPage/>}/>}
       </Routes>
     </Router>
 
