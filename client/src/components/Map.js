@@ -15,6 +15,7 @@ import { MapStyles } from '../styles/MapStyles'
 import { v4 as uuidv4 } from 'uuid';
 import Search from "./Search";
 import Event from "./Event";
+import NavBar from "./NavBar";
 
 const libraries = ['places']
 export default function Map({handleEventName, handleDateAndTime, handleActivityName, handleExperienceLevel, handleAgeRange, handleActivityDescription}) {
@@ -55,12 +56,13 @@ export default function Map({handleEventName, handleDateAndTime, handleActivityN
 
     const mapContainerStyle = {
       width:"100vw",
-      height:"85vh"
+      height:"82vh"
     }
     const styles={
       styles:MapStyles,
-      //disableDefaultUI:true,
+      disableDefaultUI:true,
       zoomControl:true,
+      streetViewControl: true,
     }
 
     const mapRef= useRef()
@@ -138,7 +140,7 @@ export default function Map({handleEventName, handleDateAndTime, handleActivityN
 
     return (
       <div>
-        <h1 className="title">TeamUp <span role="img" aria-label="tent">🤼</span></h1>
+        <NavBar/>
         <Search panTo={panTo}/>
 
          <GoogleMap
@@ -189,7 +191,7 @@ export default function Map({handleEventName, handleDateAndTime, handleActivityN
         </GoogleMap>
         {
           databaseMarkers.map((eachEvent)=>{
-            return <SingleEvent databaseMarkers={eachEvent}/>
+            return <SingleEvent key={eachEvent.id} databaseMarkers={eachEvent}/>
           })
         }
         

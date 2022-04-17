@@ -1,20 +1,26 @@
 import React from 'react'
+import "../styles/singleEvent.css"
 
 export default function SingleEvent({databaseMarkers}) {
   return (
-    <div>
-    <h1>{databaseMarkers.eventName}</h1>
-    <h3>Date and Time: {databaseMarkers.dateAndTime}</h3>
-    <h4>Activty</h4>
-    <p>{databaseMarkers.activityName}</p>
-    <h4>Experience Level</h4>
-    <p>{databaseMarkers.experienceLevel}</p>
-    <h4>Age Range</h4>
-    <p>{databaseMarkers.ageRange}</p>
-    <h4>Description</h4>
-    <p>{databaseMarkers.activityDescription}</p>
-    <button>Join</button>
-    <br/>
-  </div>
+    <div className="event-card row">
+      <div className="column">
+        <div className="top">
+          <div className="exp-level">{databaseMarkers.experienceLevel}</div>
+          <div className="event-name">{databaseMarkers.eventName}</div>
+          <div className="date-time">{databaseMarkers.dateAndTime}</div>
+        </div>
+        <div className="bottom">
+          <div className="activity">{databaseMarkers.activityName}</div>
+          <div>Age Range: {databaseMarkers.ageRange}</div>
+        </div>
+      </div>
+      <div className="column">
+        <div className="description">{databaseMarkers.activityDescription}</div>
+        <button className="bottom">Join</button>
+        <br/>
+      </div>
+      
+    </div>
   )
 }

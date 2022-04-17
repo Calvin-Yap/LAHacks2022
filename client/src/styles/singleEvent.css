@@ -1,0 +1,89 @@
+.event-card {
+    margin: 20px;
+    padding: 20px 20px;
+    border: 1px;
+    border-radius: 10px;
+    background: #383A3F;
+    color: #f2f3f4;
+}
+
+.exp-level {
+    text-transform: uppercase;
+}
+
+.event-name {
+    font-size: 40px;
+    letter-spacing: .2rem;
+    text-transform: uppercase;
+    color: #F8FFA8;
+}
+
+.date-time {
+    padding-bottom: 70px;
+}
+
+.activity {
+    font-size: 20px;
+}
+
+.description {
+    padding-bottom: 10px;
+}
+
+.row {
+    display: flex;
+}
+
+.column {
+    position: relative;
+    flex: 50%;
+}
+
+.top {
+    position: relative;
+    top: 0;
+}
+
+.bottom {
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+}
+
+.event-card button {
+    padding: 0.2em .9em;
+    border-radius: 20px;
+    border: 2px solid #FDFD96;
+    position: relative;
+    overflow: hidden;
+    background-color: transparent;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 16px;
+    transition: .3s;
+    z-index: 1;
+    font-family: inherit;
+    color: #FDFD96;
+   }
+   
+.event-card button::before {
+    content: '';
+    width: 0;
+    height: 300%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    background: #FDFD96;
+    transition: .5s ease;
+    display: block;
+    z-index: -1;
+}
+
+.event-card button:hover::before {
+    width: 105%;
+}
+
+.event-card button:hover {
+    color: #111;
+}

@@ -1,13 +1,26 @@
 import React,{useState} from "react";
+
 import Map from "./components/Map";
-import Event from "./components/Event";
 import {signInWithGoogle} from "./Firebase"
+import{
+  BrowserRouter as Router,
+  Route,
+  Routes
+}from "react-router-dom"
+import SignInPage from './components/SignInPage';
+import { useAuth } from './Firebase';
+
 function App() {
-  
+  const currentUser = useAuth();
   return (
     <div>
-      <button onClick={signInWithGoogle}>Sign in with google</button>
-      <Map />
+      
+    <Router>
+      <Routes>
+        {currentUser?<Route path="/" element={<Map/>}/>: <Route path="/" element={<SignInPage/>}/>}
+      </Routes>
+    </Router>
+
       
     </div>
   );

@@ -12,6 +12,7 @@ import usePlacesAutocomplete, {
   } from "@reach/combobox";
   
   import "@reach/combobox/styles.css";
+  import "../styles/search.css"
 export default function Search({panTo}) {
 
     const {ready, value, suggestions:{status, data}, setValue, clearSuggestions} = usePlacesAutocomplete({
@@ -43,9 +44,9 @@ export default function Search({panTo}) {
       
 
   return (
-    <div>
+    <div className='searchContainer'>
     <Combobox onSelect={(address)=>handleSelect(address)}>
-      <ComboboxInput placeholder="Search" value={value} onChange={handleInput} disabled={!ready} />
+      <ComboboxInput placeholder="Search for a Location ..." value={value} onChange={handleInput} disabled={!ready} />
       <ComboboxPopover>
         <ComboboxList>
           {status === "OK" &&
