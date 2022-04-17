@@ -1,5 +1,7 @@
-import{ initializeApp}from "firebase/app"
+import{ initializeApp } from "firebase/app"
+import { getDatabase } from "firebase/database"
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+
 var firebaseConfig = {
     apiKey: "AIzaSyCyjJAPW_YSuO1P8U5wOxT8MrxU8XO4laQ",
     authDomain: "lahacks2022-teamup.firebaseapp.com",
@@ -11,6 +13,9 @@ var firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 export const auth = getAuth(app)
+export const database = getDatabase(app)
+
+
 
 const provider = new GoogleAuthProvider()
 
@@ -21,3 +26,4 @@ export const signInWithGoogle = ()=>{
         console.log(error)
     })
 }
+
