@@ -35,7 +35,9 @@ export default function Map({user}) {
     const [experienceLevel, setExperienceLevel] = useState("")
     const [ageRange, setAgeRange] = useState("")
     const [activityDescription, setActivityDescription] = useState("")
-
+    const [photos, setPhotos] = useState([])
+    
+    
 
     useEffect(()=>{
       
@@ -44,6 +46,7 @@ export default function Map({user}) {
         let result = [];
         if(data!== null){
           Object.values(data).forEach((marker)=>{
+            
             result.push(marker)
           })
         }
@@ -72,13 +75,12 @@ export default function Map({user}) {
     const panTo = useCallback(({ lat, lng }) => {
       mapRef.current.panTo({ lat, lng });
       mapRef.current.setZoom(15);
+      window.scrollTo(0, 0)
     }, []);
     const{isLoaded, loadError} = useLoadScript({
       googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
       libraries:libraries,
     })
-
-      //setCenter({ lat:e.latLng.lat(),lng:e.latLng.lng()})
 
     if(loadError){
       return "Error Loading Maps"
@@ -91,11 +93,12 @@ export default function Map({user}) {
       setIsOpen(false)
       setDetails({})
     }
-
+    
     const submitDetails =()=>{
       setIsOpen(false)
       if(eventName !==""  && dateAndTime !=="" && activityName!=="" && ageRange!=="" &&experienceLevel!== "" ){
         const uuid = uuidv4()
+
         set(ref(database, `Markers/${uuid}`), {
           id: uuid,
           lat:holdDetails.lat,
@@ -108,9 +111,12 @@ export default function Map({user}) {
           activityDescription:activityDescription,
 
         });
-        set(ref(database, `Markers/${uuid}/attendees/${uuid}`), {
+        
+        set(ref(database, `Markers/${uuid}/attendees/`+user.uid), {
           photo: user.photoURL
         });
+        setPhotos((prev)=>[...prev, user.photoURL])
+
 
         setEventName("")
         setDateAndTime("")
@@ -123,17 +129,12 @@ export default function Map({user}) {
     }
 
     const clickedMap =(e)=>{
-        console.log(databaseMarkers)
       setIsOpen(true);
       setDetails({lat:e.latLng.lat(),lng:e.latLng.lng()})
     }
+
+
     
-    const joinClick = (e)=>{
-      const uuid = uuidv4()
-      update(ref(database, `Markers/${uuid}/attendees/${uuid}`), {
-        photo: user.photoURL
-      });
-    }
     return (
       <div>
         <NavBar/>
@@ -168,7 +169,7 @@ export default function Map({user}) {
            position={{lat:selected.lat, lng:selected.lng}}
            onCloseClick={()=> setSelected(null)}
            >
-             <div>
+             <div className="infoWindowContainer">
                <h1>{selected.eventName}</h1>
                <h3>Date and Time:{selected.dateAndTime}</h3>
                <h4>Activty</h4>
@@ -179,7 +180,7 @@ export default function Map({user}) {
                <p>{selected.ageRange}</p>
                <h4>Description</h4>
                <p>{selected.activityDescription}</p>
-               <button>Join</button>
+              
                <br/>
              </div>
            </InfoWindow>):null}
@@ -190,8 +191,7 @@ export default function Map({user}) {
         {
           
           databaseMarkers.map((eachEvent)=>{
-            console.log(eachEvent.attendees)
-            return <SingleEvent key={eachEvent.id} databaseMarkers={eachEvent} joinClick={joinClick} />
+            return <SingleEvent key={eachEvent.id} databaseMarkers={eachEvent}  user={user} arrayofphotos={photos} panTo={panTo}/>
           })
         }
         

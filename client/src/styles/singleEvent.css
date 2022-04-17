@@ -70,7 +70,6 @@
     text-transform: uppercase;
     font-size: 16px;
     transition: .3s;
-    z-index: 1;
     font-family: inherit;
     color: #FDFD96;
    }
@@ -125,4 +124,9 @@
   
 .locate-link button:hover::after {
     width: 100%;
+}
+
+.avatar{
+    padding-left: 4%;
+    border-radius: 20px;
 }

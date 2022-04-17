@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "../styles/singleEvent.css"
+import { ref, update} from "firebase/database"
+import { database} from "../Firebase";
+export default function SingleEvent({databaseMarkers, user, arrayofphotos, panTo}) {
+  const lat = databaseMarkers.lat;
+  const lng = databaseMarkers.lng;
+  const [photos, setPhotos ]= useState(arrayofphotos)
+  const joinClick = (e)=>{
+    setPhotos((prev)=>[...prev, user.photoURL])
+    update(ref(database, `Markers/`+databaseMarkers.id +`/attendees/`+user.uid), {
+      photo: user.photoURL
+    });
+    
+  }
 
-export default function SingleEvent({databaseMarkers, joinClick}) {
-  const attendees = databaseMarkers.attendees
   return (
     <div className="event-card row">
       <div className="column">
@@ -11,7 +22,8 @@ export default function SingleEvent({databaseMarkers, joinClick}) {
           <div className="event-name">{databaseMarkers.eventName}</div>
           <div className="row">
             <div className="date-time">{databaseMarkers.dateAndTime}</div>
-            <div className="locate-link"><button>LOCATE</button></div>
+            <div className="locate-link"><button value={{lat: databaseMarkers.lat, lng: databaseMarkers.lng}} onClick={(e)=>{panTo({lat, lng})}
+              }>LOCATE</button></div>
           </div>
         </div>
         <div className="bottom">
@@ -21,12 +33,12 @@ export default function SingleEvent({databaseMarkers, joinClick}) {
       </div>
       <div className="column">
         <div className="description">{databaseMarkers.activityDescription}</div>
-        <div className="bottom"><button onClick={joinClick}>Join</button></div>
+        <div className="bottom"><button value={user.photoURL} onClick={(e)=>joinClick(e.target.value)}>Join</button></div>
         <br/>
       </div>
       <div>
         {
-        //<img src={databaseMarkers.attendees} alt="avatar"/>
+          photos.length > 0?<img className="avatar" src={photos[0]} alt="avatar"/>:null
         }
       </div>
     </div>
