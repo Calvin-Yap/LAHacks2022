@@ -1,9 +1,10 @@
 import React, {useState, useCallback, useRef, useEffect} from "react";
 import Modal from 'react-modal';
 import { database} from "../Firebase";
-import {set, ref, onValue, update} from "firebase/database"
+import {set, ref, onValue} from "firebase/database"
 import SingleEvent from "./SingleEvent";
 import "../styles/map.css"
+import "../styles/modal.css"
 
 import{
   GoogleMap,
@@ -161,8 +162,15 @@ export default function Map({user}) {
         onRequestClose={closeModal}
         contentLabel="Example Modal"
         ariaHideApp={false}
-      >
-        <button onClick={closeModal}>close</button>
+        className="Modal"
+        >
+          <header>
+            Create an Event
+            <button className="close" onClick={closeModal}>
+              
+            </button>
+          </header>
+      
         <Event handleEventName={setEventName} handleDateAndTime={setDateAndTime} handleActivityName={setActivityName} handleExperienceLevel={setExperienceLevel} handleAgeRange={setAgeRange} handleActivityDescription={setActivityDescription} handleSubmit={submitDetails}/>
       </Modal>
            {selected?(<InfoWindow
