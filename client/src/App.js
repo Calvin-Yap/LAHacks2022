@@ -1,9 +1,14 @@
-import React from "react";
+import React,{useState} from "react";
 import Map from "./components/Map";
+import Event from "./components/Event";
+import {signInWithGoogle} from "./Firebase"
 function App() {
+  
   return (
     <div>
-      <Map/>
+      <button onClick={signInWithGoogle}>Sign in with google</button>
+      <Map />
+      
     </div>
   );
 }
