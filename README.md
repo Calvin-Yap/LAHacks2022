@@ -1,3 +1,10 @@
+![TeamUpMainPage](https://i.ytimg.com/vi_webp/DF4TZK5NKU0/maxresdefault.webp)
+
+## Video Demo
+
+https://user-images.githubusercontent.com/41352849/164149319-9ec83052-03eb-4158-9b21-b748520d5f7c.mp4
+
+
 ## Try demo
 [https://lahacks2022-teamup.web.app/](https://lahacks2022-teamup.web.app/)
 ## Github Repository
