@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+## Try demo
+[https://lahacks2022-teamup.web.app/](https://lahacks2022-teamup.web.app/)
+## Github Repository
+[GitHub](https://github.com/Calvin-Yap/LAHacks2022)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Inspiration
+With the World Wide Wellness track in mind, our group has always prioritized physical and mental health in ourselves and others. Coming out of lockdown from Covid-19, we found that our search for local athletics and team sports was seemingly more difficult than before. We find that sports are a great way to build meaningful relationships with others while the competitive nature of sports push one another to lead healthy lifestyles. In fact, it was through sports that our group was formed. That’s why we came up with TeamUp; a one-stop-shop for people looking for like-minded individuals looking for competition and companionship in sport! 
+## What it does
+TeamUp allows users to create sporting events in their local community of anywhere they go, whether it is basketball, volleyball, ultimate frisbee, spikeball, we got it all on the map. This allows other users to filter and observe all the possible activities in their area and TEAM UP with those respective activities. 
+## How we built itc 
+Our recipe for success included the thrill for sports, the comradery of teammates, and the hustle to get things done, with a hint of React and Firebase. 
 
-## Available Scripts
+- React
+- Google Maps API
+- Firebase(auth, real-time database, hosting)
+- Use-Place-AutoComplete
+- Fluff to make our app prettier <3 
 
-In the project directory, you can run:
+## Challenges we ran into
+The main challenge was the time limit. It was a first for our group to use most of the technologies we built this app with. With many great ideas and a variety of skillsets, we had to go through many discussions on the direction of the app and how to divvy up the respective tasks to each member. The Google Maps Platform APIs are a huge component to our web app and learning to integrate with React was challenging but rewarding as a result. 
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The main takeaway we learned from this experience is that, with motivation in ourselves and each other, we can have confidence in solving problems, challenges and finding solutions despite using new technologies. Also music really helps.
+## Accomplishments that we're proud of
+In our past hackathons, we did not have the skills and knowledge finish projects of this magnitude. The last couple months our group strived to hone in on our skills in full-stack development and after this experience we all feel closer to our goal. We grew a little bit today and we are extremely proud of our app not just as developers but in a consumer perspective as well. We think we built a great foundation for this great idea and we would love to continue working on this project.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## What's next for TeamUp
+We want to expand more with customized user profiles, a filter function for specific sports and local events, and a chat function to allow users to truly connect with one another. Also, we wanted to create a custom UI kit to create a more customized/intuitive look to adding events.
 
-### `npm test`
+## Getting Started
+### Prerequisites
+To get a local copy up and running, follow these steps:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Log onto Firebase and create a new project, create a web API key and paste into src/Firebase.js
+2. Go onto Google Developer Console and create an API key with these 4 APIs enabled
+   - Maps Javascript API
+   - Places API
+   - Geocoding API
+   - Geolocation API
 
-### `npm run build`
+Create a .env.local file
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Clone the repository
+   
+`git clone https://github.com/Calvin-Yap/LAHacks2022.git`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. cd to the correct folder `client`
+5. Run `npm install` to get the correct dependencies 
+6. Run `npm start`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Contact
+Calvin Yap - [calvinyap.com](https://www.calvinyap.com)
 
-### `npm run eject`
+Stephen Chen - [stephenjhc@gmail.com](stephenjhc@gmail.com)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Richard Uong - [uong.rich@gmail.com](uong.rich@gmail.com)
